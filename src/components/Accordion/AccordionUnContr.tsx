@@ -1,12 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 
 type AccordionPropsType = {
     titleValue: string,
     collapsedMenu: boolean
 }
 
-function Accordion(props: AccordionPropsType) {
-    if (props.collapsedMenu) {
+export function AccordionUnContr(props: AccordionPropsType) {
+
+    const [collapsedMenu, setCollaps] = useState(false)
+
+    const collapsMenuHandler = () => setCollaps(!collapsedMenu)
+
+    return (
+        <div>
+            <AccordionTitle callback={collapsMenuHandler} title={props.titleValue}/>
+            {!collapsedMenu && <AccordionBody/>}
+        </div>
+
+    );
+  /*  if (props.collapsedMenu) {
         return (
             <div>
                 <AccordionTitle title={props.titleValue}/>
@@ -20,16 +32,17 @@ function Accordion(props: AccordionPropsType) {
             <AccordionBody/>
         </div>
 
-    );
+    );*/
 }
 
 type AccordionTitlePropsType = {
     title: string
+    callback: ()=>void
 }
 
 function AccordionTitle(props: AccordionTitlePropsType) {
     return (
-        <h3>{props.title}</h3>
+        <h4 onClick={props.callback}>{props.title}</h4>
     );
 }
 function AccordionBody() {
@@ -41,5 +54,3 @@ function AccordionBody() {
         </ul>
     );
 }
-
-export default Accordion
