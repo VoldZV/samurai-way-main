@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 
 type AccordionPropsType = {
-    titleValue: string,
-    collapsedMenu: boolean
+    titleValue: string
+    defaultCollapseValue?: boolean
 }
 
 export function AccordionUnContr(props: AccordionPropsType) {
 
-    const [collapsedMenu, setCollaps] = useState(false)
+    const [collapsedMenu, setCollaps] = useState(props.defaultCollapseValue ? props.defaultCollapseValue : false)
 
     const collapsMenuHandler = () => setCollaps(!collapsedMenu)
 

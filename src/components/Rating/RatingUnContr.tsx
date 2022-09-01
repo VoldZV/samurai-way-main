@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 
-type RatingPropsType = {
-    value: 0 | 1 | 2 | 3 | 4 | 5
+
+type RatingUnContrType = {
+    defaultValue?: number
 }
 
-export function RatingUnContr() {
+export function RatingUnContr(props: RatingUnContrType) {
 
 
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(props.defaultValue  ? props.defaultValue : 0)
 
     const changeRatingHandler =(id:number) => setRating(id)
 

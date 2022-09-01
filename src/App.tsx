@@ -6,6 +6,7 @@ import { AccordionUnContr } from './components/Accordion/AccordionUnContr';
 import {AccordionControled} from "./components/Accordion/AccordionControled";
 import {RatingContr} from "./components/Rating/RatingContr";
 import {OnOffControl} from "./components/OnOff/OnnOff-Control";
+import {Select} from "./components/Select/Select";
 
 export type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
 
@@ -17,14 +18,28 @@ function App() {
     const [raitingValue, setRatingValue] = useState<RatingValueType>(0)
     const [on, setOn] = useState<boolean>(true)
 
+    const onClickAccordion = (value: any) => {
+        console.log(value)
+    }
+
+    // State для select компоненты
+    const items = [
+        {title: 'Bob', value: '1'},
+        {title: 'Nick', value: '2'},
+        {title: 'John', value: '3'},
+    ]
+    const [collapseSelect, setCollapseSelect] = useState<boolean>(true)
+    const [select, setSelect] = useState(items[0].title)
+    const onChangeSelect = (itemTitle: any) => setSelect(itemTitle)
+
     return (
         <div className="App">
             <PageTitle title={'Hello, samurai! Let\'s go!'}/>
             <PageTitle title={'My friends'}/>
             Article 1
             <RatingUnContr />
-            <AccordionUnContr titleValue={'МЕНЮ 1 (НАЖМИ)'} collapsedMenu={true}/>
-            <AccordionUnContr titleValue={'МЕНЮ 2 (НАЖМИ)'} collapsedMenu={false}/>
+            <AccordionUnContr titleValue={'МЕНЮ 1 (НАЖМИ)'} />
+            <AccordionUnContr titleValue={'МЕНЮ 2 (НАЖМИ)'} />
             Article 2
             <RatingUnContr />
             <hr/>
@@ -48,6 +63,8 @@ function App() {
             <AccordionControled titleValue={'МЕНЮ 1 (НАЖМИ)'}
                                 collapsedMenu={collapseAcc}
                                 changeCollapse={setCollapseAcc}
+                                items={items}
+                                onClickAccordion={onClickAccordion}
             />
             <hr/>
             <div>Контролируемый Rating</div>
@@ -57,6 +74,8 @@ function App() {
             <hr/>
             <div>Контролируемый Onn Off</div>
             <OnOffControl on={on} setOn={setOn}/>
+            <div>Контролируемый Select через div</div>
+            <Select setCollapseSelect={setCollapseSelect} collapseSelect={collapseSelect} items={items} onChange={onChangeSelect} value={select}/>
         </div>
     );
 }
